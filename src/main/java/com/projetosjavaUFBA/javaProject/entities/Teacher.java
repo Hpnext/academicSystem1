@@ -1,5 +1,8 @@
 package com.projetosjavaUFBA.javaProject.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Teacher extends User {
 
 	/**
@@ -7,6 +10,7 @@ public class Teacher extends User {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String teachingArea;
+	private List<Discipline> disciplines =new ArrayList<>();
 	
 	public Teacher() {
 		super();
@@ -22,6 +26,11 @@ public class Teacher extends User {
 	public void setTeachingArea(String teachingArea) {
 		this.teachingArea = teachingArea;
 	}
-	
+	public List<Discipline> getDisciplines() {
+		return disciplines;
+	}
+	public void addDisciplines(Discipline d){
+		disciplines.add(d);
+		}
 
 }

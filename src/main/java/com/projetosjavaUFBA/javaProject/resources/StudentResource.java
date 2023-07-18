@@ -5,16 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetosjavaUFBA.javaProject.entities.Teacher;
+import com.projetosjavaUFBA.javaProject.entities.Student;
+
 
 
 @RestController
-@RequestMapping(value="/teachers")
-public class TeacherResource {
-
+@RequestMapping(value="/students")
+public class StudentResource {
 	@GetMapping
-	public ResponseEntity<Teacher> findAll(){
-		Teacher u = new Teacher(2L, "maria", "maria@gmail.com", "71985458745", "Computação","123");
+	public ResponseEntity<Student> findAll(){
+		Student u = new Student(3L, "Paulo", "paulo@gmail.com", "71985458745", "Ciência Da Computação","123");
 		return ResponseEntity.ok().body(u);
 	}
+	
+	
 }
