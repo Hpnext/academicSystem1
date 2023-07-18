@@ -5,14 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name="tb_discipline")
 public class Discipline implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private Integer workLoad;
 	private Teacher teacher;
-	private List<Student> student =new ArrayList<>();
+	//private List<Student> student =new ArrayList<>();
+	
+	
+	public Discipline() {
+		super();
+	}
+	
+	
+	
 	public Discipline(Long id, String name, Integer workLoad, Teacher teacher) {
 		super();
 		this.id = id;
@@ -20,6 +39,7 @@ public class Discipline implements Serializable  {
 		this.workLoad = workLoad;
 		this.teacher = teacher;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -44,13 +64,13 @@ public class Discipline implements Serializable  {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	public List<Student> getStudent() {
+	/*public List<Student> getStudent() {
 		return student;
 	}
 	
 	public void addStundet(Student s){
 	student.add(s);
-	}
+	}*/
 	
 	@Override
 	public int hashCode() {
