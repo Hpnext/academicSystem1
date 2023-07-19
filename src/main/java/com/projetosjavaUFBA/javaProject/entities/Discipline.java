@@ -1,7 +1,10 @@
 package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -37,7 +40,8 @@ public class Discipline implements Serializable  {
 	@JoinTable(name="tb_discipline_student",
 	joinColumns=@JoinColumn(name="discipline_id"),
 	inverseJoinColumns=@JoinColumn(name="student_id"))
-	private Set<Student> student =new HashSet<>();
+	private List<Student> student =new ArrayList<>();
+	private List<String> studentName =new ArrayList<>();
 	
 	
 	public Discipline() {
@@ -72,20 +76,31 @@ public class Discipline implements Serializable  {
 	public void setWorkLoad(Integer workLoad) {
 		this.workLoad = workLoad;
 	}
-	@JsonIgnore
-	public Teacher getTeacher() {
-		return teacher;
+	//@JsonIgnore
+	public String getTeacher() {
+		return teacher.getName();
 	}
-	@JsonIgnore
+	//@JsonIgnore
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
     @JsonIgnore
-	public Set<Student> getStudent() {
+	public List<Student> getStudent() {
 		return student;
 	}
+    
+    public List<String> getStudentName() {
+    	for (int i=0; i<student.size(); i++) {
+    		studentName.add(student.get(i).getName());
+    	}
+    	
+		return studentName;
+	}
+    
+    
+    	
 	
-	@JsonIgnore
+	//@JsonIgnore
 	public void addStundet(Student s){
 	student.add(s);
 	}

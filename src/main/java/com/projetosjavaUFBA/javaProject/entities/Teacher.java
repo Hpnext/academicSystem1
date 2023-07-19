@@ -2,8 +2,10 @@ package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ public class Teacher implements Serializable {
 	private String teachingArea;
 	
 	@OneToMany(mappedBy="teacher")
-	private List<Discipline> disciplines =new ArrayList<>();
+	private Set<Discipline> disciplines =new HashSet<>();
 	
 	public Teacher() {
 		super();
@@ -139,7 +141,7 @@ public class Teacher implements Serializable {
 
 
 
-	public List<Discipline> getDisciplines() {
+	public Set<Discipline> getDisciplines() {
 		return disciplines;
 	}
 	public void addDisciplines(Discipline d){
