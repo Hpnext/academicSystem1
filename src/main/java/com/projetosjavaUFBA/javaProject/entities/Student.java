@@ -1,14 +1,18 @@
 package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
@@ -26,12 +30,14 @@ public class Student implements Serializable {
 	private String phone;
 	private String password;
 	private String course;
-	//private List<Discipline> disciplines =new ArrayList<>();
+	
+	
+	//@JoinColumn(name="student_id")
+	@ManyToMany(mappedBy="student")
+	private Set<Discipline> disciplines =new HashSet<>();
 	
 	
 	public Student() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	
@@ -120,13 +126,20 @@ public class Student implements Serializable {
 	}
 
 
-
-	/*public List<Discipline> getDisciplines() {
+	
+	public Set<Discipline> getDisciplines() {
 		return disciplines;
 	}
+	
+	
+	
 	public void addDisciplines(Discipline d){
 		disciplines.add(d);
-		}*/
+		}
+
+
+
+	
 
 
 

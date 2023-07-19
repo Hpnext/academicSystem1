@@ -1,14 +1,20 @@
 package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -22,8 +28,16 @@ public class Discipline implements Serializable  {
 	private Long id;
 	private String name;
 	private Integer workLoad;
+	//@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
-	//private List<Student> student =new ArrayList<>();
+	//@JsonIgnore
+	@ManyToMany
+	@JoinTable(name="tb_discipline_student",
+	joinColumns=@JoinColumn(name="discipline_id"),
+	inverseJoinColumns=@JoinColumn(name="student_id"))
+	private Set<Student> student =new HashSet<>();
 	
 	
 	public Discipline() {
@@ -58,20 +72,28 @@ public class Discipline implements Serializable  {
 	public void setWorkLoad(Integer workLoad) {
 		this.workLoad = workLoad;
 	}
+	@JsonIgnore
 	public Teacher getTeacher() {
 		return teacher;
 	}
+	@JsonIgnore
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	/*public List<Student> getStudent() {
+    @JsonIgnore
+	public Set<Student> getStudent() {
 		return student;
 	}
 	
+	@JsonIgnore
 	public void addStundet(Student s){
 	student.add(s);
-	}*/
+	}
 	
+	
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
