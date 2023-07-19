@@ -37,8 +37,8 @@ public class TestConfig implements CommandLineRunner {
 		
 		
 		
-		Discipline d1 = new Discipline(null, "Introdução à Lógica de Programação", 60,t1 );
-		Discipline d2 = new Discipline (null,"Teoria dos Grafos",60,t2);
+		Discipline d1 = new Discipline(null, "Introdução à Lógica de Programação", "60",t1 );
+		Discipline d2 = new Discipline (null,"Teoria dos Grafos","60",t2);
 		d2.addStundet(s1);
 		d2.addStundet(s2);
 		d1.addStundet(s1);

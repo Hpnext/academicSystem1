@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosjavaUFBA.javaProject.entities.Discipline;
-import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.DisciplineRepository;
 @Service
 public class DisciplineService {
@@ -22,6 +21,9 @@ public class DisciplineService {
 	public Discipline findById(Long id) {
 		Optional<Discipline> obj =disciplineRepository.findById(id);
 		return obj.get();
+	}
+	public Discipline insert(Discipline obj) {
+		return disciplineRepository.save(obj);
 	}
 	
 	

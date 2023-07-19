@@ -23,4 +23,8 @@ public class TeacherService {
 		return obj.get();
 	}
 	
+	public Teacher insert(Teacher obj) {
+		return teacherRepository.save(obj);
+	}
+	
 }

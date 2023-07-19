@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosjavaUFBA.javaProject.entities.Student;
-import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.StudentRepository;
 @Service
 public class StudentService {
@@ -21,6 +20,9 @@ public class StudentService {
 	public Student findById(Long id) {
 		Optional<Student> obj =studentRepository.findById(id);
 		return obj.get();
+	}
+	public Student insert(Student obj) {
+		return studentRepository.save(obj);
 	}
 	
 }

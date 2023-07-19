@@ -2,11 +2,8 @@ package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,7 +27,7 @@ public class Discipline implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Integer workLoad;
+	private String workLoad;
 	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="teacher_id")
@@ -50,7 +47,7 @@ public class Discipline implements Serializable  {
 	
 	
 	
-	public Discipline(Long id, String name, Integer workLoad, Teacher teacher) {
+	public Discipline(Long id, String name, String workLoad, Teacher teacher) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,16 +67,23 @@ public class Discipline implements Serializable  {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getWorkLoad() {
+	public String getWorkLoad() {
 		return workLoad;
 	}
-	public void setWorkLoad(Integer workLoad) {
+	public void setWorkLoad(String workLoad) {
 		this.workLoad = workLoad;
 	}
 	//@JsonIgnore
+	
 	public String getTeacher() {
-		return teacher.getName();
+		if(teacher!=null) {
+			return teacher.getName();
+		}
+		else {
+			return null;
+		}
 	}
+	
 	//@JsonIgnore
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;

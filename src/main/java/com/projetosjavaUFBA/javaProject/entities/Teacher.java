@@ -1,9 +1,7 @@
 package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,8 +27,8 @@ public class Teacher implements Serializable {
 	private String name;
 	private String email;
 	private String phone;
-	private String password;
 	private String teachingArea;
+	private String password;
 	
 	@OneToMany(mappedBy="teacher")
 	private Set<Discipline> disciplines =new HashSet<>();
@@ -49,8 +47,8 @@ public class Teacher implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
-		this.password = password;
 		this.teachingArea = teachingArea;
+		this.password = password;
 		
 	}
 
