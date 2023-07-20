@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.projetosjavaUFBA.javaProject.entities.Discipline;
 import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.DisciplineRepository;
+import com.projetosjavaUFBA.javaProject.services.exceptions.DatabaseException;
 import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
 @Service
 public class DisciplineService {
@@ -28,8 +30,16 @@ public class DisciplineService {
 		return disciplineRepository.save(obj);
 	}
 	public void delete(Long id) {
-		disciplineRepository.deleteById(id);
-	}
+	    try {
+	        if (disciplineRepository.existsById(id)) {
+	        	disciplineRepository.deleteById(id);			
+	        } else {				
+	            throw new ResourceNotFoundException(id);			
+	        }		
+	    } catch (DataIntegrityViolationException e) {			
+	        throw new DatabaseException(e.getMessage());		
+	    }	
+	} 
 	
 	public Discipline update(Long id, Discipline obj) {
 		Discipline entity = disciplineRepository.getReferenceById(id);
