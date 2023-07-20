@@ -12,6 +12,8 @@ import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.DisciplineRepository;
 import com.projetosjavaUFBA.javaProject.services.exceptions.DatabaseException;
 import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 @Service
 public class DisciplineService {
 
@@ -42,10 +44,16 @@ public class DisciplineService {
 	} 
 	
 	public Discipline update(Long id, Discipline obj) {
-		Discipline entity = disciplineRepository.getReferenceById(id);
+		try {
+			Discipline entity = disciplineRepository.getReferenceById(id);
 		updateData(entity,obj);
 		return disciplineRepository.save(entity);
+		}catch (EntityNotFoundException e) {
+			
+			throw new ResourceNotFoundException(id);
+		}
 	}
+
 
 	private void updateData(Discipline entity, Discipline obj) {	
 		entity.setName(obj.getName());

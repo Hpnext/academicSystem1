@@ -11,6 +11,8 @@ import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.TeacherRepository;
 import com.projetosjavaUFBA.javaProject.services.exceptions.DatabaseException;
 import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 @Service
 public class TeacherService {
 
@@ -41,9 +43,14 @@ public class TeacherService {
 	    }	
 	} 
 	public Teacher update(Long id, Teacher obj) {
+		try {
 		Teacher entity = teacherRepository.getReferenceById(id);
 		updateData(entity,obj);
 		return teacherRepository.save(entity);
+		}catch (EntityNotFoundException e) {
+			
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Teacher entity, Teacher obj) {	

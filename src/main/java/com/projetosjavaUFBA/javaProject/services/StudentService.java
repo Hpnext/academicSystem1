@@ -8,9 +8,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.projetosjavaUFBA.javaProject.entities.Student;
+import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.StudentRepository;
 import com.projetosjavaUFBA.javaProject.services.exceptions.DatabaseException;
 import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 @Service
 public class StudentService {
 
@@ -40,10 +43,16 @@ public class StudentService {
 	    }	
 	} 
 	public Student update(Long id, Student obj) {
-		Student entity = studentRepository.getReferenceById(id);
+		try {
+			Student entity = studentRepository.getReferenceById(id);
 		updateData(entity,obj);
 		return studentRepository.save(entity);
+		}catch (EntityNotFoundException e) {
+			
+			throw new ResourceNotFoundException(id);
+		}
 	}
+
 
 	private void updateData(Student entity, Student obj) {	
 		entity.setName(obj.getName());
