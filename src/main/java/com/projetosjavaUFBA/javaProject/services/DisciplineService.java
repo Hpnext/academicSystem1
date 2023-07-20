@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.projetosjavaUFBA.javaProject.entities.Discipline;
 import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.DisciplineRepository;
+import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
 @Service
 public class DisciplineService {
 
@@ -21,7 +22,7 @@ public class DisciplineService {
 	
 	public Discipline findById(Long id) {
 		Optional<Discipline> obj =disciplineRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
 	}
 	public Discipline insert(Discipline obj) {
 		return disciplineRepository.save(obj);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.projetosjavaUFBA.javaProject.entities.Student;
 import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.StudentRepository;
+import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
 @Service
 public class StudentService {
 
@@ -21,7 +22,7 @@ public class StudentService {
 	
 	public Student findById(Long id) {
 		Optional<Student> obj =studentRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
 	}
 	public Student insert(Student obj) {
 		return studentRepository.save(obj);
