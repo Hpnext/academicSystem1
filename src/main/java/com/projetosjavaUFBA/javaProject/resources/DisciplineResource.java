@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projetosjavaUFBA.javaProject.entities.Discipline;
+import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.services.DisciplineService;
 
 
@@ -51,5 +53,12 @@ public class DisciplineResource {
 		disciplineService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	@PutMapping(value="/{id}")
+	public ResponseEntity<Discipline> update(@PathVariable Long id,@RequestBody Discipline obj){
+		obj=disciplineService.update(id, obj);
+		return ResponseEntity.ok().body(obj);
+		
+	}
+	
 	
 }

@@ -29,5 +29,16 @@ public class TeacherService {
 	public void delete(Long id) {
 		teacherRepository.deleteById(id);
 	}
+	public Teacher update(Long id, Teacher obj) {
+		Teacher entity = teacherRepository.getReferenceById(id);
+		updateData(entity,obj);
+		return teacherRepository.save(entity);
+	}
+
+	private void updateData(Teacher entity, Teacher obj) {	
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
 	
 }

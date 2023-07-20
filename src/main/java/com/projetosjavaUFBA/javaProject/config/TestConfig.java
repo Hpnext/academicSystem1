@@ -43,9 +43,10 @@ public class TestConfig implements CommandLineRunner {
 		d2.addStundet(s2);
 		d1.addStundet(s1);
 		d1.addStundet(s2);
-		//s1.addDisciplines(d1);
-		//t1.addDisciplines(d1);
+		
 		studentRepository.saveAll(Arrays.asList(s1,s2));
+		
 		disciplineRepository.saveAll(Arrays.asList(d1,d2));
+		
 	}
 }
