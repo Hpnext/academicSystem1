@@ -26,5 +26,8 @@ public class TeacherService {
 	public Teacher insert(Teacher obj) {
 		return teacherRepository.save(obj);
 	}
+	public void delete(Long id) {
+		teacherRepository.deleteById(id);
+	}
 	
 }

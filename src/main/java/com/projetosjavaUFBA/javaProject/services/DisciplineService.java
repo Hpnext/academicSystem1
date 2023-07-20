@@ -25,6 +25,9 @@ public class DisciplineService {
 	public Discipline insert(Discipline obj) {
 		return disciplineRepository.save(obj);
 	}
+	public void delete(Long id) {
+		disciplineRepository.deleteById(id);
+	}
 	
 	
 }
