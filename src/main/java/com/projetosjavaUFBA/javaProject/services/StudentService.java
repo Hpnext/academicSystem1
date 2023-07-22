@@ -55,9 +55,19 @@ public class StudentService {
 
 
 	private void updateData(Student entity, Student obj) {	
-		entity.setName(obj.getName());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());
+		if(obj.getUsername()!=null) {
+		entity.setUsername(obj.getUsername());
+		}
+		if(obj.getName()!=null) {
+			entity.setName(obj.getName());
+			}
+		if(obj.getEmail()!=null) {
+			entity.setEmail(obj.getEmail());
+			}
+		if(obj.getPhone()!=null) {
+			entity.setPhone(obj.getPhone());
+			}
+		
 	}
 
 	

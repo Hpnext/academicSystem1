@@ -23,7 +23,7 @@ public class Teacher implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private  Long id;
-	
+	private String username;
 	private String name;
 	private String email;
 	private String phone;
@@ -34,21 +34,22 @@ public class Teacher implements Serializable {
 	private Set<Discipline> disciplines =new HashSet<>();
 	
 	public Teacher() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	
 	
 	
-	public Teacher(Long id, String name, String email, String phone,String teachingArea, String password ) {
+	public Teacher(Long id,String username, String name, String email, String phone,String teachingArea, String password ) {
 		super();
 		this.id = id;
+		this.username=username;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.teachingArea = teachingArea;
 		this.password = password;
+		
 		
 	}
 
@@ -64,6 +65,21 @@ public class Teacher implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

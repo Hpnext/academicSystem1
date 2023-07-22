@@ -16,6 +16,7 @@ import com.projetosjavaUFBA.javaProject.repositories.TeacherRepository;
 
 @Configuration
 @Profile("test")
+//@Profile("dev")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
@@ -28,12 +29,12 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Teacher t1 = new Teacher(null, "maria", "maria@gmail.com", "71985458745", "Computação","123");
-		Teacher t2 = new Teacher(null, "pedro", "pedro@gmail.com", "719854228745", "Computação","12313123");
+		Teacher t1 = new Teacher(null,"mariaacess", "maria", "maria@gmail.com", "71985458745", "Computação","123");
+		Teacher t2 = new Teacher(null,"pedroacess", "pedro", "pedro@gmail.com", "719854228745", "Computação","12313123");
 		teacherRepository.saveAll(Arrays.asList(t1,t2));
 		
-		Student s1 = new Student(null, "Paulo", "paulo@gmail.com", "71985458745", "Ciência Da Computação","123");
-		Student s2 = new Student(null, "Henrique", "Henrique@gmail.com", "71923285458745", "Ciência Da Computação","213124");
+		Student s1 = new Student(null,"pauloacess", "Paulo", "paulo@gmail.com", "71985458745", "Ciência Da Computação","123");
+		Student s2 = new Student(null, "Fernandoacess","Fernando", "Fernando@gmail.com", "71923285458745", "Ciência Da Computação","213124");
 		
 		
 		

@@ -36,7 +36,7 @@ public class TeacherResource {
 		return ResponseEntity.ok().body(obj);
 		
 	}
-	@PostMapping
+	@PostMapping(value="/create")
 	public ResponseEntity<Teacher> insert(@RequestBody Teacher obj){
 		obj=teacherService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
