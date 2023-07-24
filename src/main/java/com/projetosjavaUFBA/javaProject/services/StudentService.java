@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.projetosjavaUFBA.javaProject.dto.StudentDTO;
+import com.projetosjavaUFBA.javaProject.dto.TeacherDTO;
 import com.projetosjavaUFBA.javaProject.entities.Student;
 import com.projetosjavaUFBA.javaProject.entities.Teacher;
 import com.projetosjavaUFBA.javaProject.repositories.StudentRepository;
@@ -69,6 +71,10 @@ public class StudentService {
 			}
 		
 	}
+	public Student fromDTO(StudentDTO objDto) {
+		return new Student(objDto.getId(), null ,objDto.getName(),objDto.getEmail(),objDto.getPhone(),objDto.getCourse(),null);
+	}
+	
 
 	
 }

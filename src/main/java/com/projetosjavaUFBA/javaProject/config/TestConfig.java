@@ -37,16 +37,18 @@ public class TestConfig implements CommandLineRunner {
 		Student s2 = new Student(null, "Fernandoacess","Fernando", "Fernando@gmail.com", "71923285458745", "Ciência Da Computação","213124");
 		
 		
+		studentRepository.saveAll(Arrays.asList(s1,s2));
+		
 		
 		Discipline d1 = new Discipline(null, "Introdução à Lógica de Programação", "60",t1 );
-		Discipline d2 = new Discipline (null,"Teoria dos Grafos","60",t2);
-		
-		
-		studentRepository.saveAll(Arrays.asList(s1,s2));
-		d2.addStundet(s1);
-		d2.addStundet(s2);
 		d1.addStundet(s1);
 		d1.addStundet(s2);
+		
+		Discipline d2 = new Discipline (null,"Teoria dos Grafos","60",t2);
+		d2.addStundet(s1);
+		d2.addStundet(s2);
+		
+		
 		disciplineRepository.saveAll(Arrays.asList(d1,d2));
 		
 	}

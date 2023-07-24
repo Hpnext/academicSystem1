@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.projetosjavaUFBA.javaProject.dto.DisciplineDTO;
+import com.projetosjavaUFBA.javaProject.dto.StudentDTO;
 import com.projetosjavaUFBA.javaProject.entities.Discipline;
+import com.projetosjavaUFBA.javaProject.entities.Student;
 import com.projetosjavaUFBA.javaProject.repositories.DisciplineRepository;
 import com.projetosjavaUFBA.javaProject.services.exceptions.DatabaseException;
 import com.projetosjavaUFBA.javaProject.services.exceptions.ResourceNotFoundException;
@@ -55,8 +58,17 @@ public class DisciplineService {
 
 
 	private void updateData(Discipline entity, Discipline obj) {	
+		if(obj.getName()!=null) {
 		entity.setName(obj.getName());
+		}
+		if(obj.getWorkLoad()!=null) {
 		entity.setWorkLoad(obj.getWorkLoad());
+		}
+	}
+	
+	
+	public Discipline fromDTO(DisciplineDTO objDto) {
+		return new Discipline(objDto.getId() ,objDto.getName(),objDto.getWorkLoad(),objDto.getTeacherAll());
 	}
 
 	

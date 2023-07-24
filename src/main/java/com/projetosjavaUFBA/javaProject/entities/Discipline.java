@@ -2,8 +2,10 @@ package com.projetosjavaUFBA.javaProject.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,17 +40,17 @@ public class Discipline implements Serializable  {
 	joinColumns=@JoinColumn(name="discipline_id"),
 	inverseJoinColumns=@JoinColumn(name="student_id"))
 	private List<Student> student =new ArrayList<>();
-	private List<String> studentName =new ArrayList<>();
+	
+	private Set<String> studentName =new HashSet<>();
 	
 	
 	public Discipline() {
-		super();
+		
 	}
 	
 	
 	
 	public Discipline(Long id, String name, String workLoad, Teacher teacher) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.workLoad = workLoad;
@@ -75,6 +77,17 @@ public class Discipline implements Serializable  {
 	}
 	//@JsonIgnore
 	
+	//novo metodo em Discipline 24/07/2023
+	@JsonIgnore
+	public Teacher getTeacherAll() {
+		return teacher;
+	}
+	
+	
+	
+	
+	
+	
 	public String getTeacher() {
 		if(teacher!=null) {
 			return teacher.getName();
@@ -93,7 +106,7 @@ public class Discipline implements Serializable  {
 		return student;
 	}
     
-    public List<String> getStudentName() {
+    public Set<String> getStudentName() {
     	for (int i=0; i<student.size(); i++) {
     		studentName.add(student.get(i).getName());
     	}

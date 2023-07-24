@@ -2,6 +2,7 @@ package com.projetosjavaUFBA.javaProject.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projetosjavaUFBA.javaProject.dto.StudentDTO;
+import com.projetosjavaUFBA.javaProject.dto.TeacherDTO;
 import com.projetosjavaUFBA.javaProject.entities.Student;
 import com.projetosjavaUFBA.javaProject.services.StudentService;
 
@@ -29,23 +32,24 @@ public class StudentResource {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Student>> findAll(){
+	public ResponseEntity<List<StudentDTO>> findAll(){
 		List<Student> list = studentService.findALL();
-		return ResponseEntity.ok().body(list);
+		List<StudentDTO> listDto= list.stream().map(x -> new StudentDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Student> findById(@PathVariable Long id){
+	public ResponseEntity<StudentDTO> findById(@PathVariable Long id){
 		Student obj = studentService.findById(id);
-		return ResponseEntity.ok().body(obj);
-		
+		return ResponseEntity.ok().body(new StudentDTO(obj));
 	}
+	
 	@PostMapping(value="/create")
-	public ResponseEntity<Student> insert(@RequestBody Student obj){
+	public ResponseEntity<StudentDTO> insert(@RequestBody Student obj){
 		obj=studentService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(obj.getId()).toUri();
 				
-				return ResponseEntity.created(uri).body(obj);
+				return ResponseEntity.created(uri).body(new StudentDTO(obj));
 		
 	}
 	@DeleteMapping(value="/{id}")
@@ -55,9 +59,11 @@ public class StudentResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Student> update(@PathVariable Long id,@RequestBody Student obj){
+	public ResponseEntity<Void> update(@PathVariable Long id,@RequestBody StudentDTO objDto){
+		
+		Student obj=studentService.fromDTO(objDto);
 		obj=studentService.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.noContent().build();
 		
 	}
 	
