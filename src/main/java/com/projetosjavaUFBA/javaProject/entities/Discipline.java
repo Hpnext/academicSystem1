@@ -83,11 +83,6 @@ public class Discipline implements Serializable  {
 		return teacher;
 	}
 	
-	
-	
-	
-	
-	
 	public String getTeacher() {
 		if(teacher!=null) {
 			return teacher.getName();
